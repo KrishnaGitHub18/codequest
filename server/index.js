@@ -4,6 +4,9 @@ import cors from 'cors';
 import db from './db.js';
 
 import compiler from './controller/compilerController.js';
+import signup from './routes/users/postData.js';
+import signin from './routes/users/getData.js';
+import que from './routes/questions/getData.js';
 
 import {Server} from 'socket.io';
 import {createServer} from 'http';
@@ -31,6 +34,9 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api', compiler);
+app.use('/api', signup);
+app.use('/api', signin);
+app.use('/api', que);
 
 const port = 8080;
 server.listen(port, () => {

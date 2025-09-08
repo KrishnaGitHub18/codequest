@@ -3,7 +3,7 @@ import Tag from "../minor/tag";
 
 function Description({ data }) {
   return (
-    <div className="border-1 border-white flex flex-col m-5 p-5 gap-5">
+    <div className="flex flex-col m-5 p-5 gap-5">
       <p className="text-[25px]">{data?.title}</p>
       <div className="flex gap-3">
         <Tag data={{ title: "Easy", color: "#1b711bff" }} />

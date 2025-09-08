@@ -13,7 +13,7 @@ function Question() {
         <Description data={data} />
       </div>
       <div className="w-[50%] h-[90vh] border-1 border-white rounded-lg bg-[#242424]">
-        <Compiler />
+        <Compiler data={data}/>
       </div>
     </div>
   );

@@ -6,11 +6,25 @@ function QuestionBank() {
   const navigate = useNavigate();
 
   const [que, setQue] = useState([]);
+
   const fetchData = async () => {
-    const data = await axios.get(`${import.meta.env.VITE_API_URL}/api/que`);
-    setQue(data?.data);
-    console.log(data.data);
-  };
+    try {
+      const data = await axios.get(`${import.meta.env.VITE_API_URL}/api/que`, {
+        headers: {
+          authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
+      });
+      setQue(data?.data);
+      console.log(data.data);
+    } catch (error) {
+      console.error("Error fetching questions:", error);
+      if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+        navigate("/signin");
+      }
+    }
+  }
+
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -22,7 +36,9 @@ function QuestionBank() {
           <div
             key={index}
             className="px-8 py-3 border-1 border-[#F3E5AB] rounded-lg"
-            onClick={() => {navigate("/question", { state: q })}}
+            onClick={() => {
+              navigate("/question", { state: q });
+            }}
           >
             {index + 1}. {q?.title}
           </div>

@@ -12,6 +12,8 @@ import {Server} from 'socket.io';
 import {createServer} from 'http';
 import initSocket from "./socket.js";
 
+import middleware from './middleware/routeProtect.js';
+
 dotenv.config();
 db();
 
@@ -37,6 +39,8 @@ app.use('/api', compiler);
 app.use('/api', signup);
 app.use('/api', signin);
 app.use('/api', que);
+
+app.use('/api', middleware);
 
 const port = 8080;
 server.listen(port, () => {

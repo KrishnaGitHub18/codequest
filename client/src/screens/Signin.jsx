@@ -21,6 +21,7 @@ const Signin = () => {
       if (result.status === 200) {
         alert("Login successful");
         localStorage.setItem("user", JSON.stringify(result.data.user || {}));
+        localStorage.setItem("token", JSON.stringify(result.data.token || {}));
         navigate("/");
         
       } else {

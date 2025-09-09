@@ -1,5 +1,5 @@
 import React from "react";
-import Tag from "../minor/tag";
+import Tag from "../minor/Tag";
 
 function Description({ data, res }) {
   return (

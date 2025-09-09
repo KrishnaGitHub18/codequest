@@ -22,27 +22,34 @@ function QuestionBank() {
         navigate("/signin");
       }
     }
-  }
-
+  };
 
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
-    <div className="flex flex-col py-5 px-5 gap-5">
-      {que &&
-        que.map((q, index) => (
-          <div
-            key={index}
-            className="px-8 py-3 border-1 border-[#F3E5AB] rounded-lg"
-            onClick={() => {
-              navigate("/question", { state: q });
-            }}
-          >
-            {index + 1}. {q?.title}
-          </div>
-        ))}
+    <div className="flex flex-col py-8 px-6 gap-6 max-w-3xl mx-auto text-gray-200">
+      <h1 className="text-3xl font-bold text-center text-gray-100 mb-4">
+        🌓 Question Bank
+      </h1>
+
+      <div className="flex flex-col gap-4">
+        {que &&
+          que.map((q, index) => (
+            <div
+              key={index}
+              className="px-6 py-4 border border-gray-700 bg-gradient-to-r from-[#1e1e2f] to-[#2a2a40] rounded-xl shadow-lg hover:shadow-xl hover:border-indigo-400 hover:scale-[1.01] transition-all duration-200 cursor-pointer"
+              onClick={() => {
+                navigate("/question", { state: q });
+              }}
+            >
+              <p className="text-lg font-medium text-gray-100">
+                {index + 1}. {q?.title}
+              </p>
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

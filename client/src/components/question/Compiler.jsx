@@ -5,6 +5,7 @@ import io from "socket.io-client";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism.css";
+import VoiceChat from "../minor/VoiceChat";
 
 // const socket = io("http://localhost:8080");
 const socket = io(import.meta.env.VITE_API_URL);
@@ -74,6 +75,9 @@ function Compiler({ data, setRes }) {
     <div className="flex flex-col h-full bg-[#1e1e1e] text-white">
       <div className="p-4 space-y-3">
         <div className="p-3 bg-[#2a2a2a] rounded-md border border-gray-600">
+
+          <VoiceChat roomId={roomId} />
+
           <p className="mb-2">
             <span className="font-bold text-blue-400">Your Room ID:</span>{" "}
             {roomId || "Not generated"}

@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Home from "./screens/Home";
 import QuestionBank from "./screens/QuestionBank";
 import Question from "./screens/Question";
+import Signin from "./screens/Signin";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<QuestionBank />} />
+          <Route path="/signin" element={<Signin />} />
           <Route path="/question" element={<Question />} />
         </Routes>
       </div>

@@ -6,7 +6,8 @@ import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism.css";
 
-const socket = io("http://localhost:8080");
+// const socket = io("http://localhost:8080");
+const socket = io(import.meta.env.VITE_API_URL);
 
 function Compiler({ data, setRes }) {
   const [code, setCode] = useState(

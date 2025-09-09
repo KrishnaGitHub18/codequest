@@ -25,7 +25,8 @@ const initSocket = (io) => {
           stdin: stdin || "",
         };
 
-        const result = await axios.post("http://localhost:8080/api/run", data);
+        // const result = await axios.post("http://localhost:8080/api/run", data);
+        const result = await axios.post("https://codequest-1-k3kl.onrender.com/api/run", data);
         const output = result?.data?.stdout || result?.data?.stderr || "No output";
 
         io.to(roomId).emit("output", output);

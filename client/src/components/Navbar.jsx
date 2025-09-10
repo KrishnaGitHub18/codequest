@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+
+  const navigate = useNavigate();
   return (
     <nav className="bg-[#3B3B3B] border-b border-gray-700 px-6 py-3 shadow-md">
       <div className="flex items-center justify-between max-w-6xl mx-auto">
@@ -32,6 +35,16 @@ function Navbar() {
             className="hover:text-indigo-400 transition-colors duration-200"
           >
             Profile
+          </a>
+          <a
+            href=""
+            className="hover:text-indigo-400 transition-colors duration-200"
+            onClick={() => {
+              localStorage.clear('user', 'token');
+              navigate("/signin");
+            }}
+          >
+            Logout
           </a>
         </div>
       </div>

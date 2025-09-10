@@ -19,18 +19,20 @@ const initSocket = (io) => {
 
     
 
-  socket.on("offer", ({ roomId, offer, to }) => {
-    io.to(to).emit("offer", { sender: socket.id, offer });
-  });
 
-  socket.on("answer", ({ roomId, answer, to }) => {
-    io.to(to).emit("answer", { sender: socket.id, answer });
-  });
 
-  socket.on("ice-candidate", ({ roomId, candidate, to }) => {
-    io.to(to).emit("ice-candidate", { sender: socket.id, candidate });
-  });
 
+    socket.on("offer", ({ roomId, offer }) => {
+      socket.to(roomId).emit("offer", { offer });
+    });
+
+    socket.on("answer", ({ roomId, answer }) => {
+      socket.to(roomId).emit("answer", { answer });
+    });
+
+    socket.on("ice-candidate", ({ roomId, candidate }) => {
+      socket.to(roomId).emit("ice-candidate", { candidate });
+    });
 
 
 

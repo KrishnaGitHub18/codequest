@@ -1,40 +1,34 @@
 import React from "react";
-import { Button, Checkbox, Form, Input, ConfigProvider, theme } from "antd";
+import { Button, Checkbox, Form, Input, ConfigProvider, theme, message } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Signin = () => {
+const Signup = () => {
   const navigate = useNavigate();
 
   const onFinish = async (values) => {
     try {
-      console.log("Success:", values);
-
       const result = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/signin`,
+        `${import.meta.env.VITE_API_URL}/api/signup`,
         {
+          name: values.name,
           mailId: values.username,
           password: values.password,
         }
       );
 
-      if (result.status === 200) {
-        alert("Login successful");
+      if (result.status === 201) {
+        message.success("Signup successful 🎉");
         localStorage.setItem("user", JSON.stringify(result.data.user || {}));
         localStorage.setItem("token", JSON.stringify(result.data.token || {}));
         navigate("/");
-        
       } else {
-        alert("Invalid Credentials");
+        message.error("Invalid credentials");
       }
     } catch (error) {
-      console.error("Error during signin:", error);
-      alert("Something went wrong!");
+      console.error("Error during signup:", error);
+      message.error("Something went wrong!");
     }
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -59,55 +53,57 @@ const Signin = () => {
         }}
       >
         <Form
-          name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
+          layout="vertical"
           style={{
-            maxWidth: 400,
+            width: 400,
             padding: "2rem",
             background: "#1e1e1e",
             borderRadius: "10px",
             boxShadow: "0 4px 10px rgba(0,0,0,0.4)",
           }}
-          initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item
-            label={<span style={{ color: "#f5f5f5" }}>Username</span>}
-            name="username"
-            rules={[{ required: true, message: "Please input your username!" }]}
+            label="Name"
+            name="name"
+            rules={[{ required: true, message: "Please input your name!" }]}
           >
             <Input />
           </Form.Item>
 
           <Form.Item
-            label={<span style={{ color: "#f5f5f5" }}>Password</span>}
+            label="Email"
+            name="username"
+            rules={[
+              { required: true, message: "Please input your email!" },
+              { type: "email", message: "Enter a valid email!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Password"
             name="password"
             rules={[{ required: true, message: "Please input your password!" }]}
           >
             <Input.Password />
           </Form.Item>
 
-          <Form.Item name="remember" valuePropName="checked" label={null}>
-            <Checkbox style={{ color: "#f5f5f5" }}>Remember me</Checkbox>
+          <Form.Item name="remember" valuePropName="checked">
+            <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
-          <Form.Item label={null}>
+          <Form.Item>
             <Button type="primary" htmlType="submit" block>
-              Submit
+              Signup
             </Button>
           </Form.Item>
 
-          <Form.Item label={null}>
-            <Button
-              type="default"
-              block
-              onClick={() => navigate("/signup")}
-              style={{ }}
-            >
-              Signup
+          <Form.Item>
+            <Button type="default" block onClick={() => navigate("/login")}>
+              Already have an account? Login
             </Button>
           </Form.Item>
         </Form>
@@ -116,4 +112,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default Signup;

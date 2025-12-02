@@ -14,7 +14,7 @@ function Navbar() {
             alt="logo"
             className="h-8 w-8 rounded-full border border-gray-600"
           />
-          <span className="text-lg font-semibold text-gray-100">CodeHub</span>
+          <span className="text-lg font-semibold text-gray-100">CodeQuest</span>
         </div>
 
         <div className="flex gap-6 text-gray-300">
